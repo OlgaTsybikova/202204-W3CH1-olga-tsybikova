@@ -2,6 +2,7 @@ import Personaje from "./Personaje.js";
 
 class Luchador extends Personaje {
   arma;
+
   destreza;
 
   constructor(
@@ -23,11 +24,12 @@ class Luchador extends Personaje {
     if (valorDestreza > 10) {
       return 10;
     }
-    return valorDestreza;
+    return this.valorDestreza;
   }
 
   comunicar() {
     return `${super.comunicar()}Primero pego y luego pregunto`;
   }
 }
+
 export default Luchador;

@@ -1,4 +1,3 @@
-import Personaje from "./Modules/Personaje.js";
 import Asesor from "./Modules/Asesor.js";
 import Escudero from "./Modules/Escudero.js";
 import Luchador from "./Modules/Luchador.js";
@@ -10,7 +9,7 @@ const daenerys = new Luchador("Daenerys", "Targaryen", 30, "Dragones", 10);
 const tyrion = new Asesor("Tyrion", "Lannister", 40, daenerys);
 const bronn = new Escudero("Bronn", "AguasNegras", 54, 0, jaime);
 
-bronn();
-tyrion();
-joffrey();
-Personaje();
+const personajesArray = [joffrey, jaime, daenerys, tyrion, bronn];
+export default {
+  personajesArray,
+};
