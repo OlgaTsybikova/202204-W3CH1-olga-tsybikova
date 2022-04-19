@@ -1,48 +1,66 @@
-import Componente from "./Componente.js";
+import Rey from "../Modules/Rey.js";
+import Luchador from "../Modules/Luchador.js";
+import Asesor from "../Modules/Asesor.js";
+import Escudero from "../Modules/Escudero.js";
+import Component from "./Componente.js";
 
-class TarjetaComponente extends Componente {
-  text;
-
-  constructor() {
-    super("li", "card character__card");
-    this.element.className = "character col";
-    document.querySelector("characters-list").append(this.element);
-    this.render();
+class TargetaComponente extends Component {
+  constructor(personaje) {
+    super();
+    this.render(personaje);
   }
 
   render(personaje) {
     this.element.innerHTML = `
-   <div class="card character__card">
-            <img src="${
-              personaje.nombre === "Joffrey" ? "./img/joffrey.jpg" : ""
-            }
+    <div class="card character__card">
+            <img
+              src="${personaje.nombre === "Joffrey" ? "./img/joffrey.jpg" : ""}
               ${personaje.nombre === "Jaime" ? "./img/jaime.jpg" : ""}
               ${personaje.nombre === "Daenerys" ? "./img/daenerys.jpg" : ""}
               ${personaje.nombre === "Tyrion" ? "./img/tyrion.jpg" : ""}
               ${personaje.nombre === "Bronn" ? "./img/bronn.jpg" : ""}"
-              alt="Nombre y familia del personaje"
+              alt="${personaje.nombre} ${personaje.familia}"
               class="character__picture card-img-top"
             />
             <div class="card-body">
-              <h2 class="character__name card-title h4"></h2>
+              <h2 class="character__name card-title h4">${personaje.nombre} ${
+      personaje.familia
+    }</h2>
               <div class="character__info">
                 <ul class="list-unstyled">
-                  <li>Edad: X años</li>
+                  <li>Edad: ${personaje.edad} años</li>
                   <li>
                     Estado:
-                    <i class="fas fa-thumbs-down"></i>
+                    
                     <i class="fas fa-thumbs-up"></i>
                   </li>
                 </ul>
               </div>
               <div class="character__overlay">
                 <ul class="list-unstyled">
-                  <li>Años de reinado: X</li>
-                  <li>Arma: XXX</li>
-                  <li>Destreza: X</li>
-                  <li>Peloteo: X</li>
-                  <li>Asesora a: X</li>
-                  <li>Sirve a: X</li>
+                ${
+                  personaje instanceof Rey
+                    ? `<li>Años de reinado: ${personaje.anyosReinado} </li>`
+                    : ""
+                }
+                ${
+                  personaje instanceof Luchador
+                    ? `<li>Arma: ${personaje.arma} </li>
+                    <li>Destreza: ${personaje.destreza}</li>`
+                    : ""
+                }
+                ${
+                  personaje instanceof Asesor
+                    ? `<li>Asesora a: ${personaje.asesorado.nombre} </li>`
+                    : ""
+                }
+                ${
+                  personaje instanceof Escudero
+                    ? `<li>Peloteo: ${personaje.pelotismo.nombre} </li>
+                    <li>Sirve a: ${personaje.sirveA.nombre}</li>`
+                    : ""
+                }
+                 
                 </ul>
                 <div class="character__actions">
                   <button class="character__action btn">habla</button>
@@ -50,8 +68,14 @@ class TarjetaComponente extends Componente {
                 </div>
               </div>
             </div>
-            <i class="emoji"></i>
-          </div>`;
+            <i class="emoji" >${personaje instanceof Rey ? "👑" : ""}
+            ${personaje instanceof Luchador ? "⚔️" : ""}
+            ${personaje instanceof Escudero ? "🛡️" : ""}
+            ${personaje instanceof Asesor ? "🎓" : ""}
+            </i>
+          </div>
+    `;
   }
 }
-export default TarjetaComponente;
+
+export default TargetaComponente;
