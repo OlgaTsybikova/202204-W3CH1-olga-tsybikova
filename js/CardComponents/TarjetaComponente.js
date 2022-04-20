@@ -56,7 +56,7 @@ class TargetaComponente extends Component {
                 }
                 ${
                   personaje instanceof Escudero
-                    ? `<li>Peloteo: ${personaje.pelotismo.nombre} </li>
+                    ? `<li>Peloteo: ${personaje.pelotismo} </li>
                     <li>Sirve a: ${personaje.sirveA.nombre}</li>`
                     : ""
                 }
